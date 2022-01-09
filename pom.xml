@@ -1,7 +1,7 @@
 <project>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>fr.sedoo.proto</groupId>
-	<artifactId>proto-basic</artifactId>
+	<groupId>fr.sedoo</groupId>
+	<artifactId>sedoo-gateway-rest</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
