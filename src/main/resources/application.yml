@@ -18,3 +18,33 @@ eureka:
     preferIpAddress: true
     lease-renewal-interval-in-seconds: 3
     lease-expiration-duration-in-seconds: 5
+    
+---
+spring.profiles: monitoring
+
+spring:
+   boot:
+       admin:
+           client:
+               url: https://monitoring.sedoo.fr
+               auto-deregistration: true   
+      
+info:
+    archive: none
+
+        
+endpoints:
+    enabled: true
+    health:
+        enabled: true
+management:
+    endpoints:
+      web:
+        exposure:
+          include: "*"
+    endpoint:
+        health:
+            show-details: "ALWAYS"
+            northstar:
+                cacheup: 240
+                cachedown: 120   

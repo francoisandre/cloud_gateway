@@ -44,6 +44,19 @@
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
 		</dependency>
+<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>javax.servlet-api</artifactId>
+    <scope>provided</scope>
+</dependency>
+
+<dependency>
+    <groupId>de.codecentric</groupId>
+    <artifactId>spring-boot-admin-starter-client</artifactId>
+    <version>2.2.0</version>
+</dependency>
+
 		
 	</dependencies>
 
@@ -112,6 +125,24 @@
 					<target>${jdk.version}</target>
 				</configuration>
 			</plugin>
+<plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <inherited>false</inherited>
+                <executions>
+                    <execution>
+                        <id>uploadToSedooRepo</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>curl</executable>
+                            <commandlineArgs>--request POST --header 'Content-Type: multipart/form-data' -F 'file=@./target/${project.artifactId}-${project.version}.jar' https://services.aeris-data.fr/cdn/jarrepo/v1_0/upload</commandlineArgs>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 		</plugins>
 	</build>
 
