@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 public class APIGatewayApplication {
 
 	public static void main(String[] args) {
-		log.info("\n"+FigletFont.convertOneLine("<<< Gateway >>>"));
+		log.info("\n"+FigletFont.convertOneLine("<<< Gateway Sedoo >>>"));
 		SpringApplication.run(APIGatewayApplication.class, args);
 	}
 
