@@ -31,7 +31,15 @@ public class CorsConfiguration {
       if (request.getHeaders().containsKey(HttpHeaders.ORIGIN)) {
         ServerHttpResponse response = ctx.getResponse();
         HttpHeaders headers = response.getHeaders();
-        headers.setAccessControlAllowOrigin(request.getHeaders().getOrigin());
+        
+        if (request.getHeaders().getOrigin().toLowerCase().indexOf("localhost")<0) {
+        	headers.setAccessControlAllowOrigin(request.getHeaders().getOrigin());
+        } else {
+        	//If request comes from localhost, we must put "*" as origin
+        	if (request.getMethod() == HttpMethod.OPTIONS) {
+        		headers.setAccessControlAllowOrigin("*");
+        	}
+        }
         headers.add("Access-Control-Allow-Methods", ALLOWED_METHODS);
         headers.add("Access-Control-Max-Age", MAX_AGE);
         headers.add("Access-Control-Allow-Headers",ALLOWED_HEADERS);
