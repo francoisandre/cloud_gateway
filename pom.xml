@@ -138,7 +138,7 @@
                         </goals>
                         <configuration>
                             <executable>curl</executable>
-                            <commandlineArgs>--request POST --header 'Content-Type: multipart/form-data' -F 'file=@./target/${project.artifactId}-${project.version}.jar' https://sedoo.api.fr/aeris-cdn-rest/jarrepo/v1_0/upload</commandlineArgs>
+                            <commandlineArgs>--request POST --header 'Content-Type: multipart/form-data' -F 'file=@./target/${project.artifactId}-${project.version}.jar' https://api.sedoo.fr/aeris-cdn-rest/jarrepo/v1_0/upload</commandlineArgs>
                         </configuration>
                     </execution>
                 </executions>
