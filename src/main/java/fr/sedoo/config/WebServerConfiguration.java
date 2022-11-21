@@ -9,8 +9,8 @@ public class WebServerConfiguration implements WebServerFactoryCustomizer<NettyR
 
     // The default value is 8192 (8K) but may result in 413 when header is too lager.
     // Enlarge the header size to 16384 (16K) which is enough for most cases.
-    private static final int MAX_LINE_SIZE = 163840000;
-    private static final int MAX_HEADER_SIZE = 163840000;
+    private static final int MAX_LINE_SIZE = 327680000;
+    private static final int MAX_HEADER_SIZE = 327680000;
 
     public void customize(NettyReactiveWebServerFactory factory) {
         factory.addServerCustomizers(server ->

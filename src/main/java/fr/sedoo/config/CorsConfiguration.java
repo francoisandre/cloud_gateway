@@ -1,5 +1,7 @@
 package fr.sedoo.config;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
@@ -7,12 +9,14 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
+import reactor.netty.transport.logging.AdvancedByteBufFormat;
 
 
 @Slf4j
@@ -44,13 +48,18 @@ public class CorsConfiguration {
         headers.add("Access-Control-Max-Age", MAX_AGE);
         headers.add("Access-Control-Allow-Headers",ALLOWED_HEADERS);
         
+        
         if (request.getMethod() == HttpMethod.OPTIONS) {
           response.setStatusCode(HttpStatus.OK);
+          List<String> list = headers.get("Access-Control-Allow-Credentials");
+          if (CollectionUtils.isEmpty(list)) {
+        	  headers.add("Access-Control-Allow-Credentials", "true");
+          }
           return Mono.empty();
         }
       }
       return chain.filter(ctx);
     };
   }
-
+  
 }
