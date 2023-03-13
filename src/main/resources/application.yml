@@ -22,14 +22,7 @@ eureka:
     
 ---
 spring.profiles: monitoring
-
-spring:
-   boot:
-       admin:
-           client:
-               url: https://monitoring.sedoo.fr
-               auto-deregistration: true   
-      
+ 
 info:
     archive: none
 
