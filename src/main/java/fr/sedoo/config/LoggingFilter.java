@@ -28,12 +28,18 @@ public class LoggingFilter implements GlobalFilter {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         Set<URI> uris = exchange.getAttributeOrDefault(GATEWAY_ORIGINAL_REQUEST_URL_ATTR, Collections.emptySet());
         String originalUri = (uris.isEmpty()) ? "Unknown" : uris.iterator().next().toString();
-        if (originalUri.toLowerCase().contains("sedooaeris-catalogue-prod")) {
+        if (originalUri.toLowerCase().contains("sedoo-ovgso-prod")) {
+        	
+        	 String responseHeaders = exchange.getResponse().getHeaders().toSingleValueMap().toString();
+             String requestHeaders = exchange.getRequest().getHeaders().toSingleValueMap().toString();
+             log.info("----------------------------------");
+             log.info("Method: "+exchange.getRequest().getMethodValue());
+             log.info(requestHeaders+" --> "+requestHeaders);
+        	
         		log.info("A logged request has arrived: "+originalUri);
                 return chain.filter(exchange).then(Mono.fromRunnable(() -> {
                     String requestUri = (uris.isEmpty()) ? "Unknown" : uris.iterator().next().toString();
-                    String responseHeaders = exchange.getResponse().getHeaders().toSingleValueMap().toString();
-                    log.info(requestUri+" --> "+responseHeaders);
+                   
                 }));
         }  else {
         	return chain.filter(exchange);
